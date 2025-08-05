@@ -1,0 +1,72 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f0f8ff;
+  padding: 2em;
+}
+
+.combo-image {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+  margin: 10px;
+  border-radius: 12px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.image-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.stats {
+  margin-top: 1em;
+  text-align: left;
+  padding: 1em;
+  background: #ffffff;
+  border-radius: 8px;
+  font-family: monospace;
+}
+
+button {
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff0000;
+  color: white;
+  cursor: pointer;
+}
+.lock-button {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+button.locked {
+  background-color: #999;
+  color: #333;
+  font-weight: bold;
+}
+
+#combos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.combo {
+  flex: 1 1 250px;
+  background: #fff;
+  margin: 0.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 250px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}

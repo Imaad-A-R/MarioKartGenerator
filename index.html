@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <meta charset="UTF-8">
+  <title>Mario Kart Combo Generator</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-  Hello world
-  <script src="script.js"></script>
+  <h1>Mario Kart World Combo Generator</h1>
+  <div id="combos">
+    <div>
+      <p id="character"></p>
+      <button id="lock-character" class="lock-button">🔓 Lock Character</button>
+    </div>
+    <div>
+      <p id="kart"></p>
+      <button id="lock-kart" class="lock-button">🔓 Lock Kart</button>
+    </div>
+    <img id="character-img" src="" class="combo-image">
+    <img id="kart-img" src="" class="combo-image">
+    <p id="stats"></p>
+  </div>
+  <button id="generate">Generate Random Combos</button>
+  <script type="module" src="js/script.js" defer></script>
 </body>
-
 </html>
