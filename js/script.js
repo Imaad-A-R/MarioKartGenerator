@@ -87,15 +87,15 @@ function generateCombo() {
     document.getElementById(`kart-img-${i}`).src = kartImages[kartName];
 
     document.getElementById(`stats-${i}`).innerHTML = `
-      <strong>Stats:</strong><br>
-      Road Speed: ${finalStats.roadSpeed}<br>
-      Terrain Speed: ${finalStats.terrainSpeed}<br>
-      Liquid Speed: ${finalStats.liquidSpeed}<br>
-      Acceleration & Mini Turbo: ${finalStats.acceleration}<br>
-      Weight & Coins: ${finalStats.weight}<br>
-      Road Handling: ${finalStats.roadHandling}<br>
-      Terrain Handling: ${finalStats.terrainHandling}<br>
-      Liquid Handling: ${finalStats.liquidHandling}
+
+      ${statRow("<strong>Road Speed</strong>", finalStats.roadSpeed)}
+      ${statRow("<strong>Terrain Speed</strong>", finalStats.terrainSpeed)}
+      ${statRow("<strong>Liquid Speed</strong>", finalStats.liquidSpeed)}
+      ${statRow("<strong>Acceleration & Mini Turbo</strong>", finalStats.acceleration)}
+      ${statRow("<strong>Weight & Coins</strong>", finalStats.weight)}
+      ${statRow("<strong>Road Handling</strong>", finalStats.roadHandling)}
+      ${statRow("<strong>Terrain Handling</strong>", finalStats.terrainHandling)}
+      ${statRow("<strong>Liquid Handling</strong>", finalStats.liquidHandling)}
     `;
   }
 }
@@ -118,6 +118,35 @@ function toggleLock(index, part) {
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+//FUNCTION FOR PROGRESS BAR
+//has the HTML for the simple progress bar, then when needed it calls this function to generate it
+function bar(value, max = 17) {
+  const pct = Math.max(0, Math.min(100, (value / max) * 100));
+  return `
+    <div class="bar-row">
+      <span class="bar-value">${value}</span>
+      <div class="progress">
+        <div class="progress-bar" style="width:${pct}%"></div>
+      </div>
+    </div>
+  `;
+}
+
+function statRow(label, value, max = 17) {
+  return `
+    <div class="stat-block">
+      <div class="stat-label">${label}:</div>
+      <div class="bar-row">
+        <span class="bar-value">${value}</span>
+        <div class="progress">
+          <div class="progress-bar" style="width:${(value/max)*100}%"></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 
 document.getElementById("generate").addEventListener("click", generateCombo);
 setupCombosUI();

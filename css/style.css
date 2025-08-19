@@ -76,3 +76,38 @@ button.locked {
   max-width: 680px;  /* shrink width, adjust this value as needed */
   height: auto;      /* keeps the aspect ratio correct */
 }
+
+/*PROGRESS BAR*/
+.stat-block {
+  margin-bottom: 12px;
+}
+
+.stat-label {
+  margin-bottom: 2px;
+  font-weight: normal;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bar-value {
+  width: 24px;          /* reserve more space */
+  text-align: right;
+  font-weight: bold;
+}
+
+.progress {
+  flex: 1;
+  height: 7px;
+  background-color: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #fbc805;
+}
