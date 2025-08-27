@@ -1,19 +1,11 @@
 import { characters } from "../data/characters.js";
 import { karts } from "../data/karts.js";
 import { characterImages, kartImages } from "../data/images.js";
+import { Player } from "./player.js";
 
 const playerCount = 4;
 
-const lockStates = Array.from({ length: playerCount }, () => ({
-  character: false,
-  kart: false
-}));
-
-const currentCombos = Array.from({ length: playerCount }, () => ({
-  character: null,
-  kart: null
-}));
-
+const players = Array.from({ length: playerCount }, () => new Player());
 
 function getRandomItem(obj) {
   const keys = Object.keys(obj);
@@ -47,23 +39,15 @@ function setupCombosUI() {
   }
 
   for (let i = 0; i < playerCount; i++) {
-    document.getElementById(`lock-character-${i}`).addEventListener("click", () => toggleLock(i, "character"));
-    document.getElementById(`lock-kart-${i}`).addEventListener("click", () => toggleLock(i, "kart"));
+    document.getElementById(`lock-character-${i}`).addEventListener("click", () => handleLockButtonClick(i, "character"));
+    document.getElementById(`lock-kart-${i}`).addEventListener("click", () => handleLockButtonClick(i, "kart"));
   }
 }
 
 function generateCombo() {
   for (let i = 0; i < playerCount; i++) {
-    if (!lockStates[i].character) {
-      currentCombos[i].character = getRandomItem(characters);
-    }
-
-    if (!lockStates[i].kart) {
-      currentCombos[i].kart = getRandomItem(karts);
-    }
-
-    const characterName = currentCombos[i].character;
-    const kartName = currentCombos[i].kart;
+    const characterName = players[i].setCharacter(getRandomItem(characters));
+    const kartName = players[i].setKart(getRandomItem(karts));
 
     const charStats = characters[characterName];
     const kartStats = karts[kartName];
@@ -100,17 +84,17 @@ function generateCombo() {
   }
 }
 
-function toggleLock(index, part) {
-  lockStates[index][part] = !lockStates[index][part];
-
+function handleLockButtonClick(index, part) {
+  const isLocked = players[index].toggleLock(part); // update lock and return new state
   const button = document.getElementById(`lock-${part}-${index}`);
-  button.textContent = lockStates[index][part] ? `🔒 Unlock ${capitalize(part)}` : `🔓 Lock ${capitalize(part)}`;
 
-  // Optional: Keep this if you want to change button appearance
-  if (lockStates[index][part]) {
-    button.classList.add("locked");
-  } else {
-    button.classList.remove("locked");
+  if (isLocked) {
+  button.textContent = `🔒 Unlock ${capitalize(part)}`;
+  button.classList.add("locked");
+  } 
+  else {
+  button.textContent = `🔓 Lock ${capitalize(part)}`;
+  button.classList.remove("locked");
   }
 }
 

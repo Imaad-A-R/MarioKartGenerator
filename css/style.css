@@ -1,5 +1,5 @@
-body {
-  font-family: Arial, sans-serif;
+body {/*body text*/
+  font-family: Arial, sans-serif; 
   text-align: center;
   background-color: #f0f8ff;
   padding: 2em;
@@ -20,7 +20,7 @@ body {
   gap: 2px;
 }
 
-.stats {
+.stats { /*stat text*/
   margin-top: 1em;
   text-align: left;
   padding: 1em;
@@ -29,7 +29,7 @@ body {
   font-family: monospace;
 }
 
-button {
+button { /*generate combos and lock button formatting*/
   padding: 0.5em 1em;
   font-size: 1rem;
   border: none;
@@ -38,29 +38,29 @@ button {
   color: white;
   cursor: pointer;
 }
-.lock-button {
+.lock-button { /*lock button sizing*/
   padding: 6px 10px;
   font-size: 0.8rem;
   border-radius: 4px;
 }
 
-button:hover {
+button:hover { /*changes colour of button when hovered*/
   background-color: #0056b3;
 }
-button.locked {
+button.locked { /*changes colour of lock buttons when they are locked*/
   background-color: #999;
   color: #333;
   font-weight: bold;
 }
 
-#combos {
+#combos { /*Formatting of combo container*/
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
 }
 
-.combo {
+.combo { /*formatting of combos*/
   flex: 1 1 250px;
   background: #fff;
   margin: 0.5rem;
@@ -70,10 +70,10 @@ button.locked {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
-#title-img {
+#title-img { /*formatting of title image*/
   display: block;
   margin: 0 auto;    /* keeps it centered */
-  max-width: 680px;  /* shrink width, adjust this value as needed */
+  max-width: 580px;  /* shrink width, adjust this value as needed */
   height: auto;      /* keeps the aspect ratio correct */
 }
 
@@ -82,7 +82,7 @@ button.locked {
   margin-bottom: 12px;
 }
 
-.stat-label {
+.stat-label { /*labels for each stat*/
   margin-bottom: 2px;
   font-weight: normal;
 }
