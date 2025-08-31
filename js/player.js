@@ -24,4 +24,4 @@ export class Player{
         }
         return this.kart;
     }
-} 
+}
