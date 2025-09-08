@@ -1,22 +1,27 @@
+//imports
 import { characters } from "../data/characters.js";
 import { karts } from "../data/karts.js";
 import { characterImages, kartImages } from "../data/images.js";
 import { Player } from "./player.js";
 
+//declare player count and create player objects
 const playerCount = 4;
 
 const players = Array.from({ length: playerCount }, () => new Player());
 
+//generate random character or kart
 function getRandomItem(obj) {
   const keys = Object.keys(obj);
   const randomKey = keys[Math.floor(Math.random() * keys.length)];
   return randomKey;
 }
 
+//function that creates and inserts player combo container HTML
 function setupCombosUI() {
   const container = document.getElementById("combos");
   container.innerHTML = "";
 
+  //loop creates 4 player containers and inserts the html
   for (let i = 0; i < playerCount; i++) {
     const comboDiv = document.createElement("div");
     comboDiv.className = "combo";
@@ -33,25 +38,44 @@ function setupCombosUI() {
         <img id="kart-img-${i}" class="combo-image" src="">
       </div>
       <div id="stats-${i}" class="stats"></div>
+      <button id="single-randomizer-${i}" class="randomize-button">Randomize Combo</button>
     `;
 
     container.appendChild(comboDiv);
   }
 
+  //create lock button and individual randomizer button event listeners
   for (let i = 0; i < playerCount; i++) {
     document.getElementById(`lock-character-${i}`).addEventListener("click", () => handleLockButtonClick(i, "character"));
     document.getElementById(`lock-kart-${i}`).addEventListener("click", () => handleLockButtonClick(i, "kart"));
+    document.getElementById(`single-randomizer-${i}`).addEventListener("click", () => generateCombo(i));
   }
 }
 
-function generateCombo() {
-  for (let i = 0; i < playerCount; i++) {
+//function to generate random combos
+function generateCombo(comboNumber=null) {
+
+  //set start and end to randomize all combos if no parameters, or randomize the given singular one
+  let start, end;
+  if (comboNumber===null){
+    start=0;
+    end = playerCount-1;
+  }
+  else{
+    start = comboNumber;
+    end =comboNumber;
+  }
+  
+  for (let i = start; i <= end; i++) {
+    //create character and kart name variables
+    //randomize the kart and character and then pass them to the objects to be updated
     const characterName = players[i].setCharacter(getRandomItem(characters));
     const kartName = players[i].setKart(getRandomItem(karts));
 
     const charStats = characters[characterName];
     const kartStats = karts[kartName];
 
+    //calculate stats for combo
     const finalStats = {
       roadSpeed: charStats.roadSpeed + kartStats.roadSpeed,
       terrainSpeed: charStats.terrainSpeed + kartStats.terrainSpeed,
@@ -65,11 +89,13 @@ function generateCombo() {
       liquidHandling: charStats.liquidHandling + kartStats.liquidHandling
     };
 
+    //insert character and kart names and images
     document.getElementById(`character-${i}`).innerText = `Character: ${characterName}`;
     document.getElementById(`kart-${i}`).innerText = `Kart: ${kartName}`;
     document.getElementById(`character-img-${i}`).src = characterImages[characterName];
     document.getElementById(`kart-img-${i}`).src = kartImages[kartName];
 
+    //insert stats HTML
     document.getElementById(`stats-${i}`).innerHTML = `
 
       ${statRow("<strong>Road Speed</strong>", finalStats.roadSpeed)}
@@ -84,8 +110,10 @@ function generateCombo() {
   }
 }
 
+//function to handle clicks for lock button, updating the states for the respective player, and changing the display
 function handleLockButtonClick(index, part) {
-  const isLocked = players[index].toggleLock(part); // update lock and return new state
+  //update lock and return new state
+  const isLocked = players[index].toggleLock(part);
   const button = document.getElementById(`lock-${part}-${index}`);
 
   if (isLocked) {
@@ -132,5 +160,5 @@ function statRow(label, value, max = 17) {
 }
 
 
-document.getElementById("generate").addEventListener("click", generateCombo);
+document.getElementById("generate").addEventListener("click", () => generateCombo());
 setupCombosUI();
