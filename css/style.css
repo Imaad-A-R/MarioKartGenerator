@@ -1,7 +1,7 @@
 body {/*body text*/
   font-family: Arial, sans-serif; 
   text-align: center;
-  background-color: #f0f8ff;
+  background: url("../data/background.png") no-repeat center center fixed;  background-color: #f0f8ff;
   padding: 2em;
 }
 
@@ -111,3 +111,18 @@ button.locked { /*changes colour of lock buttons when they are locked*/
   height: 100%;
   background-color: #fbc805;
 }
+
+/* Footer smaller & muted */
+.site-credits {
+  font-size: 0.85rem;
+  color: #555;
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+}
+.site-credits h2 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+.credit-items p { margin: 5px 0; }
+.final-note { margin-top: 10px; font-style: italic; color: #444; }
