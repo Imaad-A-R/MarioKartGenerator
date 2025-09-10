@@ -48,24 +48,12 @@ function setupCombosUI() {
   for (let i = 0; i < playerCount; i++) {
     document.getElementById(`lock-character-${i}`).addEventListener("click", () => handleLockButtonClick(i, "character"));
     document.getElementById(`lock-kart-${i}`).addEventListener("click", () => handleLockButtonClick(i, "kart"));
-    document.getElementById(`single-randomizer-${i}`).addEventListener("click", () => generateCombo(i));
+    document.getElementById(`single-randomizer-${i}`).addEventListener("click", () => generateCombo(i, i));
   }
 }
 
 //function to generate random combos
-function generateCombo(comboNumber=null) {
-
-  //set start and end to randomize all combos if no parameters, or randomize the given singular one
-  let start, end;
-  if (comboNumber===null){
-    start=0;
-    end = playerCount-1;
-  }
-  else{
-    start = comboNumber;
-    end =comboNumber;
-  }
-  
+function generateCombo(start, end) {
   for (let i = start; i <= end; i++) {
     //create character and kart name variables
     //randomize the kart and character and then pass them to the objects to be updated
@@ -160,5 +148,5 @@ function statRow(label, value, max = 17) {
 }
 
 
-document.getElementById("generate").addEventListener("click", () => generateCombo());
+document.getElementById("generate").addEventListener("click", () => generateCombo(0, playerCount-1));
 setupCombosUI();
